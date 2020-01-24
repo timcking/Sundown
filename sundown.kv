@@ -1,0 +1,68 @@
+#:kivy 1.0
+
+BoxLayout:
+
+    canvas.before:
+        Color:
+            rgba: (0, 0, 128, .3)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    orientation: 'vertical'
+    rows: 3
+
+    BoxLayout:
+        orientation: 'horizontal'
+        height: dp(30)
+        size_hint_y: None
+        rows: 1
+
+        TextInput:
+            id: search_text
+            height: dp(30)
+            hint_text: 'Enter City'
+            size_hint_y: None
+            multiline: False
+            padding: dp(5), dp(5), 0, 0
+
+        Button:
+            id: button_search
+            text: 'Search'
+            size_hint_x: None
+            width: dp(80)
+            size_hint_y: None
+            height: dp(30)
+            # on_press: root.searchChamber(search_text.text)
+
+    GridLayout:
+        cols: 2
+
+        Label:
+            text: "Sunrise"
+            font_size: "28sp"
+
+        Label:
+            text: "Sunset"
+            font_size: "28sp"
+
+        AsyncImage:
+            id: sunup
+            source: './data/sunrise-100px.png'
+
+        AsyncImage:
+            id: sundown
+            source: './data/sunset-100px.png'
+
+        Label:
+            id: label_sunrise
+            font_size: '20sp'
+
+        Label:
+            id: label_sunset
+            font_size: '20sp'
+
+    Label:
+        id: label_datetime
+        halign: 'center'
+        font_size: '18sp'
