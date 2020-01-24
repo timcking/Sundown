@@ -33,7 +33,7 @@ BoxLayout:
             width: dp(80)
             size_hint_y: None
             height: dp(30)
-            # on_press: root.searchChamber(search_text.text)
+            on_press: app.search_city()
 
     GridLayout:
         cols: 2
@@ -48,11 +48,13 @@ BoxLayout:
 
         AsyncImage:
             id: sunup
-            source: './data/sunrise-100px.png'
+            allow_stretch: True
+            source: './data/sun.png'
 
         AsyncImage:
             id: sundown
-            source: './data/sunset-100px.png'
+            allow_stretch: True
+            source: './data/sun.png'
 
         Label:
             id: label_sunrise

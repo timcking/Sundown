@@ -7,12 +7,10 @@ class Sundown():
     def __init__(self, **kwargs):
         super(Sundown, self).__init__(**kwargs)
 
-    def get_astral(self):
+    def get_astral(self, city_name):
 
         today = date.today()
         long_date = today.strftime("%B %d, %Y")
-
-        city_name = 'Sacramento'
 
         a = Astral()
         a.solar_depression = 'civil'
@@ -33,11 +31,23 @@ class Sundown():
         sunset_time = sun['sunset'].strftime("%I:%M %p")
 
         return lat_lon, long_date, city_info, sunrise_time, sunset_time
-  
+
 class SundownApp(App):
+    sd = Sundown()
+
     def on_start(self):
-        sd = Sundown()
-        lat_lon, long_date, city_info, sunrise, sunset = sd.get_astral()
+
+        # Initially default to Sacramento
+        lat_lon, long_date, city_info, sunrise, sunset = self.sd.get_astral('Sacramento')
+
+        self.root.ids.label_sunrise.text = sunrise
+        self.root.ids.label_sunset.text = sunset
+        date_city = city_info + '\n' + long_date + '\n' + lat_lon
+        self.root.ids.label_datetime.text = date_city
+
+    def search_city(self):
+        city = self.root.ids.search_text.text
+        lat_lon, long_date, city_info, sunrise, sunset = self.sd.get_astral(city)
 
         self.root.ids.label_sunrise.text = sunrise
         self.root.ids.label_sunset.text = sunset
