@@ -36,12 +36,13 @@ class SundownApp(App):
     sd = Sundown()
 
     def on_start(self):
+        self.icon = './data/sunrise-sunset.png'
 
         # Initially default to Sacramento
         lat_lon, long_date, city_info, sunrise, sunset = self.sd.get_astral('Sacramento')
 
-        self.root.ids.label_sunrise.text = sunrise
-        self.root.ids.label_sunset.text = sunset
+        self.root.ids.label_sunrise.text = sunrise + '\nSunrise'
+        self.root.ids.label_sunset.text = sunset + '\nSunset'
         date_city = city_info + '\n' + long_date + '\n' + lat_lon
         self.root.ids.label_datetime.text = date_city
 

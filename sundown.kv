@@ -35,34 +35,33 @@ BoxLayout:
             height: dp(30)
             on_press: app.search_city()
 
-    GridLayout:
-        cols: 2
-
-        Label:
-            text: "Sunrise"
-            font_size: "28sp"
-
-        Label:
-            text: "Sunset"
-            font_size: "28sp"
+    BoxLayout:
+        orientation: 'horizontal'
+        rows: 1
+        padding: dp(10)
 
         AsyncImage:
             id: sunup
             allow_stretch: True
-            source: './data/sun.png'
+            source: './data/sunrise-sunset.png'
 
-        AsyncImage:
-            id: sundown
-            allow_stretch: True
-            source: './data/sun.png'
+
+    GridLayout:
+        cols: 2
 
         Label:
             id: label_sunrise
-            font_size: '20sp'
+            font_size: '24sp'
+            size_hint_y: None
+            height: dp(80)
+            halign: 'center'
 
         Label:
             id: label_sunset
-            font_size: '20sp'
+            font_size: '24sp'
+            size_hint_y: None
+            height: dp(80)
+            halign: 'center'
 
     Label:
         id: label_datetime
