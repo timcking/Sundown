@@ -14,13 +14,13 @@ BoxLayout:
 
     BoxLayout:
         orientation: 'horizontal'
-        height: dp(30)
+        height: dp(35)
         size_hint_y: None
         rows: 1
 
         TextInput:
             id: search_text
-            height: dp(30)
+            height: dp(35)
             hint_text: 'Enter City'
             size_hint_y: None
             multiline: False
@@ -32,8 +32,8 @@ BoxLayout:
             size_hint_x: None
             width: dp(80)
             size_hint_y: None
-            height: dp(30)
-            on_press: app.search_city()
+            height: dp(35)
+            on_press: app.on_search()
 
     BoxLayout:
         orientation: 'horizontal'

@@ -16,11 +16,10 @@ class Sundown():
         a.solar_depression = 'civil'
 
         city = a[city_name]
-
         city_info = str('%s, %s' % (city.name, city.region))
 
-        timezone = city.timezone
-        print('Timezone: %s' % timezone)
+        # timezone = city.timezone
+        # print('Timezone: %s' % timezone)
 
         lat_lon = ('Latitude: %.03f, Longitude: %.03f\n' % (city.latitude, city.longitude))
 
@@ -39,19 +38,19 @@ class SundownApp(App):
         self.icon = './data/sunrise-sunset.png'
 
         # Initially default to Sacramento
-        lat_lon, long_date, city_info, sunrise, sunset = self.sd.get_astral('Sacramento')
+        self.search_city('Sacramento')
+
+    def on_search(self):
+        city = self.root.ids.search_text.text
+
+        if city:
+            self.search_city(city)
+
+    def search_city(self, city):
+        lat_lon, long_date, city_info, sunrise, sunset = self.sd.get_astral(city)
 
         self.root.ids.label_sunrise.text = sunrise + '\nSunrise'
         self.root.ids.label_sunset.text = sunset + '\nSunset'
-        date_city = city_info + '\n' + long_date + '\n' + lat_lon
-        self.root.ids.label_datetime.text = date_city
-
-    def search_city(self):
-        city = self.root.ids.search_text.text
-        lat_lon, long_date, city_info, sunrise, sunset = self.sd.get_astral(city)
-
-        self.root.ids.label_sunrise.text = sunrise
-        self.root.ids.label_sunset.text = sunset
         date_city = city_info + '\n' + long_date + '\n' + lat_lon
         self.root.ids.label_datetime.text = date_city
 
