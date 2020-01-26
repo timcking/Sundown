@@ -1,4 +1,7 @@
+import time
 import kivy
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
 from kivy.app import App
 from datetime import date
 from astral import Astral
@@ -15,8 +18,17 @@ class Sundown():
         a = Astral()
         a.solar_depression = 'civil'
 
-        city = a[city_name]
-        city_info = str('%s, %s' % (city.name, city.region))
+        # If city not found, set to default Sacramento
+        try:
+            city = a[city_name]
+            city_info = str('%s, %s' % (city.name, city.region))
+        except Exception as e:
+            popup = Popup(title='Sundown',
+               content=Label(text='City ' + city_name + ' not found.'), size_hint=(.6, .4))
+            popup.open()
+
+            city = a['Sacramento']
+            city_info = str('%s, %s' % (city.name, city.region))
 
         # timezone = city.timezone
         # print('Timezone: %s' % timezone)
@@ -45,6 +57,7 @@ class SundownApp(App):
 
         if city:
             self.search_city(city)
+            self.root.ids.search_text.text = ''
 
     def search_city(self, city):
         lat_lon, long_date, city_info, sunrise, sunset = self.sd.get_astral(city)
