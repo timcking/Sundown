@@ -47,7 +47,7 @@ class SundownApp(App):
     sd = Sundown()
 
     def on_start(self):
-        self.icon = './data/sunrise-sunset.png'
+        self.icon = './data/sunset.png'
 
         # Initially default to Sacramento
         self.search_city('Sacramento')

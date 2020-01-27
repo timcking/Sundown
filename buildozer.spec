@@ -46,10 +46,10 @@ requirements = python3,kivy,astral,pytz,httplib2,requests,six,urllib3
 #garden_requirements =
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = %(source.dir)s/data/sunset.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/data/sunrise-sunset.png
+icon.filename = %(source.dir)s/data/sunset.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
