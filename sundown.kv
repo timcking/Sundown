@@ -1,6 +1,10 @@
 #:kivy 1.0
 
 BoxLayout:
+    search_text: search_text
+    label_datetime: label_datetime
+    label_sunrise: label_sunrise
+    label_sunset: label_sunset
 
     canvas.before:
         Color:
@@ -17,6 +21,7 @@ BoxLayout:
         height: dp(35)
         size_hint_y: None
         rows: 1
+
 
         TextInput:
             id: search_text
@@ -44,7 +49,6 @@ BoxLayout:
             id: sunup
             allow_stretch: True
             source: './data/sunrise-sunset.png'
-
 
     GridLayout:
         cols: 2
