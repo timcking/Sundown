@@ -6,6 +6,7 @@ from kivy.app import App
 from kivy.properties import ObjectProperty
 from datetime import date
 from astral import Astral
+from kivy.config import Config
 
 class Sundown():
     def __init__(self, **kwargs):
@@ -23,11 +24,18 @@ class Sundown():
         try:
             city = a[city_name]
             city_info = str('%s, %s' % (city.name, city.region))
+
+            # Set default city to last one searched
+            App.get_running_app().config.set('Sundown', 'city', city.name)
+            App.get_running_app().config.write()
         except Exception as e:
             popup = Popup(title='Sundown',
                content=Label(text='City ' + city_name + ' not found.'), size_hint=(.6, .4))
             popup.open()
-            city = a['Sacramento']
+
+            # If city not found use the one in the config file
+            _city = App.get_running_app().config.get('Sundown', 'city')
+            city = a[_city]
             city_info = str('%s, %s' % (city.name, city.region))
 
         # timezone = city.timezone
@@ -55,8 +63,9 @@ class SundownApp(App):
     def on_start(self):
         self.icon = './data/sunset.png'
 
-        # Initially default to Sacramento
-        self.search_city('Sacramento')
+        # Initially use city in config file
+        _city = self.config.get('Sundown', 'city')
+        self.search_city(_city)
 
     def on_search(self):
         city = self.root.search_text.text
@@ -71,6 +80,12 @@ class SundownApp(App):
         self.root.label_sunrise.text = sunrise + '\nSunrise'
         self.root.label_sunset.text = sunset + '\nSunset'
         self.root.label_datetime.text = footer_data
+
+    def build_config(self, config):
+        """
+        Set the default values for the configs sections.
+        """
+        config.read('sundown.ini')
 
 if __name__ == '__main__':
     SundownApp().run()
